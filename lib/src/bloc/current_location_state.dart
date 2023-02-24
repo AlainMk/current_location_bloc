@@ -2,11 +2,10 @@ part of 'current_location_bloc.dart';
 
 /// CurrentLocationState
 // ignore: public_member_api_docs
-enum CurrentLocationStatus { initial, success, error, loading }
+enum CurrentLocationStatus { success, error, loading }
 
 /// CurrentLocationStatusX
 extension CurrentLocationStatusX on CurrentLocationStatus {
-  bool get isInitial => this == CurrentLocationStatus.initial;
   bool get isSuccess => this == CurrentLocationStatus.success;
   bool get isError => this == CurrentLocationStatus.error;
   bool get isLoading => this == CurrentLocationStatus.loading;
@@ -16,7 +15,7 @@ extension CurrentLocationStatusX on CurrentLocationStatus {
 class CurrentLocationState extends Equatable {
   /// primary constructor
   const CurrentLocationState({
-    this.status = CurrentLocationStatus.initial,
+    this.status = CurrentLocationStatus.loading,
     double? longitude,
     double? latitude,
     String? message,

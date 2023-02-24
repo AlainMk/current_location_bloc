@@ -31,17 +31,13 @@ class CurrentLocationBloc
           }
         }
         emit(state.copyWith(status: CurrentLocationStatus.loading));
-        await emit.onEach<LocationData>(
+        await emit.forEach<LocationData>(
           location.onLocationChanged,
-          onData: (location) {
-            return emit(
-              state.copyWith(
-                status: CurrentLocationStatus.success,
-                latitude: location.latitude,
-                longitude: location.longitude,
-              ),
-            );
-          },
+          onData: (location) => state.copyWith(
+            status: CurrentLocationStatus.success,
+            latitude: location.latitude,
+            longitude: location.longitude,
+          ),
           onError: (e, __) => state.copyWith(
             status: CurrentLocationStatus.error,
             message: e.toString(),
